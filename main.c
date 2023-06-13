@@ -17,6 +17,7 @@ void ultrasonico_init(uint8_t trigger, uint8_t echo) {
     gpio_init(echo);
     /* Configuro el Echo como entrada */
     gpio_set_dir(echo, false);
+    
 }
 
 /*
@@ -27,7 +28,7 @@ void ultrasonico_init(uint8_t trigger, uint8_t echo) {
  * 
  *  @return distancia en cm
  */
-float ultrasonico_get_distance_cm(uint8_t 1, uint8_t 0) {
+float ultrasonico_get_distance_cm(uint8_t trigger, uint8_t echo) {
     /* Escribo un 1 en el Trigger */
     gpio_put(trigger, true);
     /* Espero 10 us con el pulso encendido */
@@ -55,8 +56,8 @@ int main(void) {
     stdio_init_all();
     // Elegir un GPIO para trigger, echo y buzzer
     int trigger=0;
-    int echo=1
-    int buzzer=2
+    int echo=1;
+    int buzzer=2;
     // Inicializacion del ultrasonico
     ultrasonico_init(trig, echo);
     // Inicializo buzzer
