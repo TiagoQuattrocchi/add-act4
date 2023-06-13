@@ -17,8 +17,6 @@ void ultrasonico_init(uint8_t trigger, uint8_t echo) {
     gpio_init(echo);
     /* Configuro el Echo como entrada */
     gpio_set_dir(echo, false);
-    gpio_init(2);
-    gpio_set_dir(2,true);
 }
 
 /*
@@ -56,24 +54,27 @@ int main(void) {
     // Inicializacion del USB
     stdio_init_all();
     // Elegir un GPIO para trigger, echo y buzzer
-
+    int trigger=0;
+    int echo=1
+    int buzzer=2
     // Inicializacion del ultrasonico
     ultrasonico_init(trig, echo);
     // Inicializo buzzer
-
+    gpio_init(buzzer);
+    gpio_set_dir(buzzer, true);
 
     while(1) {
         // Hago una lectura de distancia
         float d = ultrasonico_get_distance_cm(trig, echo);
         // Muestro por consola
         if(d<10){
-            gpio_put(2,true);
+            gpio_put(buzzer,true);
         }
         else{
-            gpio_put(2,false);
+            gpio_put(buzzer,false);
         }
         // Verifico distancia
-            printf("distancia: %.2f cm", d);
+            printf("distancia: %.2f\n ", d);
         // Espero
         sleep_ms(10);
     }
